@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="BU29S7" name="Outset" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="YW4tEd" name="Outset">
     <GROUP id="{08B4255C-6792-1333-C4D2-110BD672E3EA}" name="Source">
       <FILE id="EiP6Pz" name="PluginProcessor.cpp" compile="1" resource="0"
@@ -12,6 +11,19 @@
       <FILE id="c3sbkL" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="ITB4EN" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="yEIi7P" name="PresetsComp.cpp" compile="1" resource="0" file="Source/PresetsComp.cpp"/>
+      <FILE id="AqhqZs" name="PresetsComp.h" compile="0" resource="0" file="Source/PresetsComp.h"/>
+      <FILE id="ONEGrD" name="EnvComp.cpp" compile="1" resource="0" file="Source/EnvComp.cpp"/>
+      <FILE id="EtNajv" name="EnvComp.h" compile="0" resource="0" file="Source/EnvComp.h"/>
+      <FILE id="RAmzXf" name="FilterComp.cpp" compile="1" resource="0" file="Source/FilterComp.cpp"/>
+      <FILE id="iMJAgB" name="FilterComp.h" compile="0" resource="0" file="Source/FilterComp.h"/>
+      <FILE id="hkJxLk" name="KeyboardComp.cpp" compile="1" resource="0"
+            file="Source/KeyboardComp.cpp"/>
+      <FILE id="WvBPUC" name="KeyboardComp.h" compile="0" resource="0" file="Source/KeyboardComp.h"/>
+      <FILE id="VoR4yh" name="LFOComp.cpp" compile="1" resource="0" file="Source/LFOComp.cpp"/>
+      <FILE id="mtZHcK" name="LFOComp.h" compile="0" resource="0" file="Source/LFOComp.h"/>
+      <FILE id="WC138k" name="OscComp.cpp" compile="1" resource="0" file="Source/OscComp.cpp"/>
+      <FILE id="eHsa6L" name="OscComp.h" compile="0" resource="0" file="Source/OscComp.h"/>
     </GROUP>
   </MAINGROUP>
   <MODULES>
@@ -53,5 +65,26 @@
         <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../juce"/>
+        <MODULEPATH id="juce_audio_devices" path="../../juce"/>
+        <MODULEPATH id="juce_audio_formats" path="../../juce"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../juce"/>
+        <MODULEPATH id="juce_audio_processors" path="../../juce"/>
+        <MODULEPATH id="juce_audio_utils" path="../../juce"/>
+        <MODULEPATH id="juce_core" path="../../juce"/>
+        <MODULEPATH id="juce_data_structures" path="../../juce"/>
+        <MODULEPATH id="juce_dsp" path="../../juce"/>
+        <MODULEPATH id="juce_events" path="../../juce"/>
+        <MODULEPATH id="juce_graphics" path="../../juce"/>
+        <MODULEPATH id="juce_gui_basics" path="../../juce"/>
+        <MODULEPATH id="juce_gui_extra" path="../../juce"/>
+      </MODULEPATHS>
+    </VS2022>
   </EXPORTFORMATS>
 </JUCERPROJECT>

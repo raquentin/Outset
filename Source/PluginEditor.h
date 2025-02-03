@@ -10,6 +10,12 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "PresetsComp.h"
+#include "EnvComp.h"
+#include "FilterComp.h"
+#include "KeyboardComp.h"
+#include "LFOComp.h"
+#include "OscComp.h"
 
 //==============================================================================
 /**
@@ -28,8 +34,12 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     OutsetAudioProcessor& audioProcessor;
-    
+    PresetsComp presets_comp;
+    EnvComp env_comp;
+    FilterComp filter_comp;
+    KeyboardComp keyboard_comp;
+    LFOComp lfo_comp;
+    OscComp osc_comp;
 
-    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OutsetAudioProcessorEditor)
 };
