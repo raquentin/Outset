@@ -10,12 +10,12 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
-#include "PresetsComp.h"
-#include "EnvComp.h"
-#include "FilterComp.h"
-#include "KeyboardComp.h"
-#include "LFOComp.h"
-#include "OscComp.h"
+#include "GUI/PresetsComp.h"
+#include "GUI/EnvComp.h"
+#include "GUI/FilterComp.h"
+#include "GUI/KeyboardComp.h"
+#include "GUI/LFOComp.h"
+#include "GUI/OscComp.h"
 
 //==============================================================================
 /**
@@ -40,6 +40,7 @@ private:
     KeyboardComp keyboard_comp;
     LFOComp lfo_comp;
     OscComp osc_comp;
+
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OutsetAudioProcessorEditor)
 };
