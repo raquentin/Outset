@@ -16,6 +16,7 @@
 #include "GUI/KeyboardComp.h"
 #include "GUI/LFOComp.h"
 #include "GUI/OscComp.h"
+#include "GUI/OscEnvTab.h"
 
 //==============================================================================
 /**
@@ -35,12 +36,12 @@ private:
     // access the processor object that created it.
     OutsetAudioProcessor& audioProcessor;
     PresetsComp presets_comp;
-    EnvComp env_comp;
+    //EnvComp env_comp;
     FilterComp filter_comp;
     KeyboardComp keyboard_comp;
     LFOComp lfo_comp;
-    OscComp osc_comp;
-
+    //OscComp osc_comp;
+	OscEnvTab osc_env_tab;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OutsetAudioProcessorEditor)
 };

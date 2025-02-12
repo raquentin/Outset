@@ -18,11 +18,11 @@ OutsetAudioProcessorEditor::OutsetAudioProcessorEditor (OutsetAudioProcessor& p)
     getConstrainer()->setFixedAspectRatio(ratio);
     setSize(800.0, 800.0 / ratio);
     addAndMakeVisible(presets_comp);
-    addAndMakeVisible(env_comp);
+    //addAndMakeVisible(env_comp);
     addAndMakeVisible(filter_comp);
     addAndMakeVisible(keyboard_comp);
     addAndMakeVisible(lfo_comp);
-    addAndMakeVisible(osc_comp);
+    addAndMakeVisible(osc_env_tab);
 	setResizable(true, true);
 }
 
@@ -52,11 +52,11 @@ void OutsetAudioProcessorEditor::resized()
 
     // setting the bounds here
     presets_comp.setBounds(0, 0, getWidth(), height_6th);
-    osc_comp.setBounds(0, height_6th, width_half, height_3rd);
+    osc_env_tab.setBounds(0, height_6th, width_half, 2 * height_3rd);
     filter_comp.setBounds(width_half, height_6th, width_half, height_3rd);
-    env_comp.setBounds(0, height_half, width_half, height_3rd);
+    //env_comp.setBounds(0, height_half, width_half, height_3rd);
     lfo_comp.setBounds(width_half, height_half, width_half, height_3rd);
     keyboard_comp.setBounds(0, height_6th * 5, getWidth(), height_6th);
 
-	osc_comp.setTabDepth();
+	//osc_comp.setTabDepth();
 }
