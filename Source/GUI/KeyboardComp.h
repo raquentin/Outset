@@ -12,6 +12,7 @@
 
 #include <JuceHeader.h>
 
+
 //==============================================================================
 /*
 */
@@ -25,5 +26,8 @@ public:
     void resized() override;
 
 private:
+    
+    juce::MidiKeyboardState keyboardState;
+    juce::MidiKeyboardComponent keyboardComponent;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KeyboardComp)
 };
