@@ -12,12 +12,12 @@
 #include "KeyboardComp.h"
 
 //==============================================================================
-KeyboardComp::KeyboardComp() : keyboardComponent (keyboardState, juce::MidiKeyboardComponent::horizontalKeyboard)
+KeyboardComp::KeyboardComp(juce::MidiKeyboardState& ks ) : keyboardState(ks), keyboardComponent (keyboardState, juce::MidiKeyboardComponent::horizontalKeyboard)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
+    keyboardComponent.setWantsKeyboardFocus(false);
     addAndMakeVisible (keyboardComponent);
-//    keyboardComponent.setBounds(getBounds());
 }
 
 KeyboardComp::~KeyboardComp()
