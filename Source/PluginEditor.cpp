@@ -10,8 +10,8 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-OutsetAudioProcessorEditor::OutsetAudioProcessorEditor (OutsetAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+OutsetAudioProcessorEditor::OutsetAudioProcessorEditor (OutsetAudioProcessor& p, juce::MidiKeyboardState& ks )
+    : AudioProcessorEditor (&p), audioProcessor (p), keyboard_comp(ks)
 {
     double ratio = 4.0 / 3.0;
     setResizeLimits(400, 400 / ratio, 1200, 1200 / ratio);

@@ -11,7 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "GUI/OscEnvParent.h"
+#include "OscEnvParent.h"
 
 class OscEnvTab : public juce::TabbedComponent
 {

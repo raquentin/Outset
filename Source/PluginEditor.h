@@ -24,7 +24,7 @@
 class OutsetAudioProcessorEditor  : public juce::AudioProcessorEditor
 {
 public:
-    OutsetAudioProcessorEditor (OutsetAudioProcessor&);
+    OutsetAudioProcessorEditor (OutsetAudioProcessor&, juce::MidiKeyboardState& ks /*this gets passed to keyboard_comp*/);
     ~OutsetAudioProcessorEditor() override;
 
     //==============================================================================
