@@ -5,6 +5,10 @@
   <MAINGROUP id="YW4tEd" name="Outset">
     <GROUP id="{08B4255C-6792-1333-C4D2-110BD672E3EA}" name="Source">
       <GROUP id="{D000975A-FD13-24BE-CFE2-76B8EFA2C9CE}" name="GUI">
+        <GROUP id="{141F00DE-8226-3935-6728-4725DDB95C5D}" name="DX7_Boxes">
+          <FILE id="kUxmcz" name="FMBoxComp.cpp" compile="1" resource="0" file="Source/GUI/FMBoxComp.cpp"/>
+          <FILE id="qWZRfV" name="FMBoxComp.h" compile="0" resource="0" file="Source/GUI/FMBoxComp.h"/>
+        </GROUP>
         <FILE id="fJU4Vc" name="PresetsComp.cpp" compile="1" resource="0" file="Source/GUI/PresetsComp.cpp"/>
         <FILE id="r4RiQs" name="PresetsComp.h" compile="0" resource="0" file="Source/GUI/PresetsComp.h"/>
         <FILE id="bk5l5h" name="FilterComp.cpp" compile="1" resource="0" file="Source/GUI/FilterComp.cpp"/>

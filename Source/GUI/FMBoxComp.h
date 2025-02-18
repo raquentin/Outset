@@ -1,31 +1,29 @@
 /*
   ==============================================================================
 
-    LFOComp.h
-    Created: 2 Feb 2025 12:49:27pm
+    FMBoxComp.h
+    Created: 13 Feb 2025 2:39:50pm
     Author:  josep
 
   ==============================================================================
 */
 
 #pragma once
-
 #include <JuceHeader.h>
-#include "FMBoxComp.h"
 
 //==============================================================================
 /*
 */
-class LFOComp  : public juce::Component
+class FMBoxComp : public juce::Component
 {
 public:
-    LFOComp();
-    ~LFOComp() override;
+    FMBoxComp();
+    ~FMBoxComp() override;
 
-    void paint (juce::Graphics&) override;
+    void paint(juce::Graphics&) override;
     void resized() override;
 
 private:
-    FMBoxComp fm_box;
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LFOComp)
+    void algorithm_1(juce::Graphics& g, juce::Rectangle<int> bounds);
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FMBoxComp)
 };
