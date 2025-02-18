@@ -47,6 +47,10 @@ LFOComp::LFOComp()
         if (algo_ind == -1) algo_ind = 31;
         repaint();
     };
+
+
+    image = juce::ImageFileFormat::loadFrom(BinaryData::algorithm_1_png, BinaryData::algorithm_1_pngSize);
+   
 }
 
 LFOComp::~LFOComp()
@@ -75,7 +79,14 @@ void LFOComp::paint (juce::Graphics& g)
     g.setColour(juce::Colours::black);
     g.drawRect(centeredRect, 2);
 
-    g.drawText("Algorithm: " + std::to_string(algo_ind+1), x, y - 20, bounds.getHeight() / 3 * 2, 20, juce::Justification::centred, true);
+    if (image.isValid())
+    {
+        // Get component bounds and draw image centered
+        g.drawImageWithin(image, centeredRect.getX(), centeredRect.getY(), centeredRect.getWidth(), centeredRect.getHeight(),
+            juce::RectanglePlacement::centred);
+
+        g.drawText("Algorithm: " + std::to_string(algo_ind + 1), x, y - 20, bounds.getHeight() / 3 * 2, 20, juce::Justification::centred, true);
+    }
 }
 
 void LFOComp::resized()
