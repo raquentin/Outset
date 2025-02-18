@@ -30,7 +30,7 @@ public:
         bounds = bounds.withTrimmedBottom(30);
         auto oscBounds = bounds.removeFromTop(bounds.getHeight() / 2);
         oscComp.setBounds(oscBounds);
-        envComp.setBounds(bounds);
+        envComp.setBounds(bounds.withTrimmedBottom(-30)); // undo the trimming for the tab
     }
 
 private:
