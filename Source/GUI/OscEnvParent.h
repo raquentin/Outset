@@ -11,8 +11,9 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "GUI/OscComp.h"
-#include "GUI/EnvComp.h"
+
+#include "OscComp.h"
+#include "EnvComp.h"
 
 class OscEnvParent : public juce::Component
 {
