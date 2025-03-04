@@ -1,35 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<JUCERPROJECT id="BU29S7" name="Outset" projectType="audioplug" useAppConfig="1"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              headerPath="GUI/">
   <MAINGROUP id="YW4tEd" name="Outset">
     <GROUP id="{08B4255C-6792-1333-C4D2-110BD672E3EA}" name="Source">
+      <GROUP id="{B02D3D08-A9D3-894C-D0E2-70D7EDCB3FA2}" name="DSP">
+        <FILE id="vspn2h" name="Filters.cpp" compile="1" resource="0" file="Source/DSP/Filters.cpp"/>
+        <FILE id="ypU5MK" name="Filters.h" compile="0" resource="0" file="Source/DSP/Filters.h"/>
+      </GROUP>
       <GROUP id="{D000975A-FD13-24BE-CFE2-76B8EFA2C9CE}" name="GUI">
-        <FILE id="fJU4Vc" name="PresetsComp.cpp" compile="1" resource="0" file="Source/GUI/PresetsComp.cpp"
-              xcodeResource="0"/>
-        <FILE id="r4RiQs" name="PresetsComp.h" compile="0" resource="0" file="Source/GUI/PresetsComp.h"
-              xcodeResource="0"/>
-        <FILE id="bk5l5h" name="FilterComp.cpp" compile="1" resource="0" file="Source/GUI/FilterComp.cpp"
-              xcodeResource="0"/>
-        <FILE id="HyxEHZ" name="FilterComp.h" compile="0" resource="0" file="Source/GUI/FilterComp.h"
-              xcodeResource="0"/>
-        <FILE id="daBOM6" name="OscEnvTab.h" compile="0" resource="0" file="Source/GUI/OscEnvTab.h"
-              xcodeResource="0"/>
-        <FILE id="CwAqHb" name="OscEnvParent.h" compile="0" resource="0" file="Source/GUI/OscEnvParent.h"
-              xcodeResource="0"/>
-        <FILE id="Z68KAI" name="OscComp.cpp" compile="1" resource="0" file="Source/GUI/OscComp.cpp"
-              xcodeResource="0"/>
-        <FILE id="QGE4tF" name="OscComp.h" compile="0" resource="0" file="Source/GUI/OscComp.h"
-              xcodeResource="0"/>
-        <FILE id="qfQrAq" name="EnvComp.cpp" compile="1" resource="0" file="Source/GUI/EnvComp.cpp"
-              xcodeResource="0"/>
-        <FILE id="Ex0nPe" name="EnvComp.h" compile="0" resource="0" file="Source/GUI/EnvComp.h"
-              xcodeResource="0"/>
-        <FILE id="MsK9Ch" name="LFOComp.cpp" compile="1" resource="0" file="Source/GUI/LFOComp.cpp"
-              xcodeResource="0"/>
-        <FILE id="PCUPkB" name="LFOComp.h" compile="0" resource="0" file="Source/GUI/LFOComp.h"
-              xcodeResource="0"/>
+        <GROUP id="{B02D3D08-A9D3-894C-D0E2-70D7EDCB3FA2}" name="images">
+          <FILE id="MudsyY" name="algorithm_1.png" compile="0" resource="1" file="Images/algorithm_1.png"/>
+        </GROUP>
+        <FILE id="fJU4Vc" name="PresetsComp.cpp" compile="1" resource="0" file="Source/GUI/PresetsComp.cpp"/>
+        <FILE id="r4RiQs" name="PresetsComp.h" compile="0" resource="0" file="Source/GUI/PresetsComp.h"/>
+        <FILE id="bk5l5h" name="FilterComp.cpp" compile="1" resource="0" file="Source/GUI/FilterComp.cpp"/>
+        <FILE id="HyxEHZ" name="FilterComp.h" compile="0" resource="0" file="Source/GUI/FilterComp.h"/>
+        <FILE id="daBOM6" name="OscEnvTab.h" compile="0" resource="0" file="Source/GUI/OscEnvTab.h"/>
+        <FILE id="CwAqHb" name="OscEnvParent.h" compile="0" resource="0" file="Source/GUI/OscEnvParent.h"/>
+        <FILE id="Z68KAI" name="OscComp.cpp" compile="1" resource="0" file="Source/GUI/OscComp.cpp"/>
+        <FILE id="QGE4tF" name="OscComp.h" compile="0" resource="0" file="Source/GUI/OscComp.h"/>
+        <FILE id="qfQrAq" name="EnvComp.cpp" compile="1" resource="0" file="Source/GUI/EnvComp.cpp"/>
+        <FILE id="Ex0nPe" name="EnvComp.h" compile="0" resource="0" file="Source/GUI/EnvComp.h"/>
+        <FILE id="MsK9Ch" name="LFOComp.cpp" compile="1" resource="0" file="Source/GUI/LFOComp.cpp"/>
+        <FILE id="PCUPkB" name="LFOComp.h" compile="0" resource="0" file="Source/GUI/LFOComp.h"/>
         <FILE id="Z2Dvd8" name="KeyboardComp.cpp" compile="1" resource="0"
               file="Source/GUI/KeyboardComp.cpp" xcodeResource="0"/>
         <FILE id="TcRm2K" name="KeyboardComp.h" compile="0" resource="0" file="Source/GUI/KeyboardComp.h"

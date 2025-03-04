@@ -143,7 +143,10 @@ void OutsetAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     // this code if your algorithm always overwrites all the output channels.
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
+    
+    //our code (non-template stuff) starts here
 
+    keyboardState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
     splitBufferByEvents(buffer, midiMessages);
 }
 
@@ -176,9 +179,10 @@ juce::MidiBuffer& midiMessages)
 
 void OutsetAudioProcessor::handleMIDI(uint8_t data0, uint8_t data1, uint8_t data2)
 {
-    char s[16];
-    snprintf(s, 16, "%02hhX %02hhX %02hhX", data0, data1, data2);
-    DBG(s);
+    //the code below just prints all the incoming midi messages to the console. this is slow and should be commented out unless needed
+//    char s[16];
+//    snprintf(s, 16, "%02hhX %02hhX %02hhX", data0, data1, data2);
+//    DBG(s);
 }
 
 void OutsetAudioProcessor::render(juce::AudioBuffer<float>& buffer, int sampleCount, int bufferOffset) {}
@@ -191,7 +195,7 @@ bool OutsetAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* OutsetAudioProcessor::createEditor()
 {
-    return new OutsetAudioProcessorEditor (*this);
+    return new OutsetAudioProcessorEditor (*this, keyboardState);
 }
 
 //==============================================================================
