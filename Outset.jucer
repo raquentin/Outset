@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="BU29S7" name="Outset" projectType="audioplug" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="YW4tEd" name="Outset">
     <GROUP id="{08B4255C-6792-1333-C4D2-110BD672E3EA}" name="Source">
       <GROUP id="{B02D3D08-A9D3-894C-D0E2-70D7EDCB3FA2}" name="DSP">
@@ -7,7 +11,61 @@
       </GROUP>
       <GROUP id="{D000975A-FD13-24BE-CFE2-76B8EFA2C9CE}" name="GUI">
         <GROUP id="{B02D3D08-A9D3-894C-D0E2-70D7EDCB3FA2}" name="images">
-          <FILE id="MudsyY" name="algorithm_1.png" compile="0" resource="1" file="Images/algorithm_1.png"/>
+          <FILE id="EdCQT8" name="algorithm_1.png" compile="0" resource="1" file="Images/algorithm_1.png"/>
+          <FILE id="NUsrza" name="algorithm_2.png" compile="0" resource="1" file="Images/algorithm_2.png"/>
+          <FILE id="KbgItp" name="algorithm_3.png" compile="0" resource="1" file="Images/algorithm_3.png"/>
+          <FILE id="QoqmZD" name="algorithm_4.png" compile="0" resource="1" file="Images/algorithm_4.png"/>
+          <FILE id="fjVdnx" name="algorithm_5.png" compile="0" resource="1" file="Images/algorithm_5.png"/>
+          <FILE id="PcRUfv" name="algorithm_6.png" compile="0" resource="1" file="Images/algorithm_6.png"/>
+          <FILE id="Rog2cp" name="algorithm_7.png" compile="0" resource="1" file="Images/algorithm_7.png"/>
+          <FILE id="lu6QZe" name="algorithm_8.png" compile="0" resource="1" file="Images/algorithm_8.png"/>
+          <FILE id="c2zU2f" name="algorithm_9.png" compile="0" resource="1" file="Images/algorithm_9.png"/>
+          <FILE id="Oi1Cq9" name="algorithm_10.png" compile="0" resource="1"
+                file="Images/algorithm_10.png"/>
+          <FILE id="fhJK36" name="algorithm_11.png" compile="0" resource="1"
+                file="Images/algorithm_11.png"/>
+          <FILE id="nRz2cd" name="algorithm_12.png" compile="0" resource="1"
+                file="Images/algorithm_12.png"/>
+          <FILE id="Ne02Qr" name="algorithm_13.png" compile="0" resource="1"
+                file="Images/algorithm_13.png"/>
+          <FILE id="nEwErs" name="algorithm_14.png" compile="0" resource="1"
+                file="Images/algorithm_14.png"/>
+          <FILE id="GuKbMN" name="algorithm_15.png" compile="0" resource="1"
+                file="Images/algorithm_15.png"/>
+          <FILE id="t2LFFj" name="algorithm_16.png" compile="0" resource="1"
+                file="Images/algorithm_16.png"/>
+          <FILE id="UmkGNU" name="algorithm_17.png" compile="0" resource="1"
+                file="Images/algorithm_17.png"/>
+          <FILE id="YfRoGz" name="algorithm_18.png" compile="0" resource="1"
+                file="Images/algorithm_18.png"/>
+          <FILE id="sUGKpl" name="algorithm_19.png" compile="0" resource="1"
+                file="Images/algorithm_19.png"/>
+          <FILE id="Xbh4VM" name="algorithm_20.png" compile="0" resource="1"
+                file="Images/algorithm_20.png"/>
+          <FILE id="Vrg7c0" name="algorithm_21.png" compile="0" resource="1"
+                file="Images/algorithm_21.png"/>
+          <FILE id="Y2ZxII" name="algorithm_22.png" compile="0" resource="1"
+                file="Images/algorithm_22.png"/>
+          <FILE id="nPYVOi" name="algorithm_23.png" compile="0" resource="1"
+                file="Images/algorithm_23.png"/>
+          <FILE id="kq20wp" name="algorithm_24.png" compile="0" resource="1"
+                file="Images/algorithm_24.png"/>
+          <FILE id="sI1oY9" name="algorithm_25.png" compile="0" resource="1"
+                file="Images/algorithm_25.png"/>
+          <FILE id="RUYsSS" name="algorithm_26.png" compile="0" resource="1"
+                file="Images/algorithm_26.png"/>
+          <FILE id="TxN6kp" name="algorithm_27.png" compile="0" resource="1"
+                file="Images/algorithm_27.png"/>
+          <FILE id="UlinLR" name="algorithm_28.png" compile="0" resource="1"
+                file="Images/algorithm_28.png"/>
+          <FILE id="dm5cK3" name="algorithm_29.png" compile="0" resource="1"
+                file="Images/algorithm_29.png"/>
+          <FILE id="plojKN" name="algorithm_30.png" compile="0" resource="1"
+                file="Images/algorithm_30.png"/>
+          <FILE id="sL8tPR" name="algorithm_31.png" compile="0" resource="1"
+                file="Images/algorithm_31.png"/>
+          <FILE id="g0H0xs" name="algorithm_32.png" compile="0" resource="1"
+                file="Images/algorithm_32.png"/>
         </GROUP>
         <FILE id="fJU4Vc" name="PresetsComp.cpp" compile="1" resource="0" file="Source/GUI/PresetsComp.cpp"/>
         <FILE id="r4RiQs" name="PresetsComp.h" compile="0" resource="0" file="Source/GUI/PresetsComp.h"/>
@@ -22,9 +80,8 @@
         <FILE id="MsK9Ch" name="LFOComp.cpp" compile="1" resource="0" file="Source/GUI/LFOComp.cpp"/>
         <FILE id="PCUPkB" name="LFOComp.h" compile="0" resource="0" file="Source/GUI/LFOComp.h"/>
         <FILE id="Z2Dvd8" name="KeyboardComp.cpp" compile="1" resource="0"
-              file="Source/GUI/KeyboardComp.cpp" xcodeResource="0"/>
-        <FILE id="TcRm2K" name="KeyboardComp.h" compile="0" resource="0" file="Source/GUI/KeyboardComp.h"
-              xcodeResource="0"/>
+              file="Source/GUI/KeyboardComp.cpp"/>
+        <FILE id="TcRm2K" name="KeyboardComp.h" compile="0" resource="0" file="Source/GUI/KeyboardComp.h"/>
       </GROUP>
       <FILE id="EiP6Pz" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
