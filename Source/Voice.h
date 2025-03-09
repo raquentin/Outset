@@ -9,3 +9,14 @@
 */
 
 #pragma once
+
+struct Voice {
+    void reset() {
+        note = -1;
+        velocity = 0;
+    }
+    
+    int note;
+    int velocity;
+    
+};
