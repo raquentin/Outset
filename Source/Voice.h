@@ -10,13 +10,22 @@
 
 #pragma once
 
+#include "DSP/Oscillator.h"
+
 struct Voice {
     void reset() {
         note = -1;
-        velocity = 0;
+//        velocity = 0;
+    }
+    
+    float render()
+    {
+        return osc.nextSample();
+        osc.reset();
     }
     
     int note;
-    int velocity;
+//    int velocity;
+    Oscillator osc;
     
 };

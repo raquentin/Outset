@@ -13,6 +13,7 @@
         <FILE id="ypU5MK" name="Filters.h" compile="0" resource="0" file="Source/DSP/Filters.h"/>
         <FILE id="oEqigw" name="NoiseGenerator.h" compile="0" resource="0"
               file="Source/DSP/NoiseGenerator.h"/>
+        <FILE id="LYGaEL" name="Oscillator.h" compile="0" resource="0" file="Source/DSP/Oscillator.h"/>
       </GROUP>
       <GROUP id="{D000975A-FD13-24BE-CFE2-76B8EFA2C9CE}" name="GUI">
         <GROUP id="{B02D3D08-A9D3-894C-D0E2-70D7EDCB3FA2}" name="images">
