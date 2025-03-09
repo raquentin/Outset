@@ -13,7 +13,7 @@
 
 Synth::Synth()
 {
-    sampleRate = 44100.0f;
+//    sampleRate = 48000.0f;
 }
 void Synth::allocateResources(double sampleRate_, int /*samplesPerBlock*/)
 {
