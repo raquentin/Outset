@@ -24,12 +24,31 @@ void Synth::deallocateResources()
 {
 // do nothing
 }
-void Synth::reset() {
-    voice.reset();
-}
-void Synth::render(float** outputBuffers, int sampleCount)
+
+void Synth::reset()
 {
-    // do nothing yet
+    voice.reset();
+    noiseGen.reset();
+}
+
+void Synth::render(float** outputBuffers, int sampleCount)
+{ //noise rendering from book. will replace with osc code later
+    float* outputBufferLeft = outputBuffers[0];
+    float* outputBufferRight = outputBuffers[1];
+    
+    for (int sample = 0; sample < sampleCount; ++sample) {
+        float noise = noiseGen.nextValue();
+        
+        float output = 0.0f; 
+        if (voice.note > -1) {
+            output = noise * (voice.velocity / 127.0f) * 0.5f;
+        }
+        
+        outputBufferLeft[sample] = output; 
+        if (outputBufferRight != nullptr) {//conditional check for stereo
+            outputBufferRight[sample] = output;
+        }
+    }
 }
 
 void Synth::noteOn(int note, int velocity) 

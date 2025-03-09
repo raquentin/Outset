@@ -202,7 +202,16 @@ void OutsetAudioProcessor::handleMIDI(uint8_t data0, uint8_t data1, uint8_t data
     
 }
 
-void OutsetAudioProcessor::render(juce::AudioBuffer<float>& buffer, int sampleCount, int bufferOffset) {}
+void OutsetAudioProcessor::render(juce::AudioBuffer<float>& buffer, int sampleCount, int bufferOffset) 
+{
+    float* outputBuffers[2] = { nullptr, nullptr }; 
+    outputBuffers[0] = buffer.getWritePointer(0) + bufferOffset;
+    if (getTotalNumOutputChannels() > 1) { //conditional checks for if audio is stereo.
+        outputBuffers[1] = buffer.getWritePointer(1) + bufferOffset;
+    }
+    
+    synth.render(outputBuffers, sampleCount);
+}
 
 //==============================================================================
 bool OutsetAudioProcessor::hasEditor() const

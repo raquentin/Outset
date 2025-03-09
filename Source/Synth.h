@@ -13,6 +13,7 @@
 
 #include <JuceHeader.h>
 #include "Voice.h"
+#include "DSP/NoiseGenerator.h"
 
 class Synth {
 public:
@@ -29,4 +30,5 @@ private:
     
     float sampleRate;
     Voice voice; //will eventually be a collection of voices. likely a vector
+    NoiseGenerator noiseGen;
 };
