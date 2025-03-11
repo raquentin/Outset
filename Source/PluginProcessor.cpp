@@ -95,13 +95,24 @@ void OutsetAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    
+    synth.allocateResources(sampleRate, samplesPerBlock);
+    reset();
 }
 
 void OutsetAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
+    
+    synth.deallocateResources();
 }
+
+void OutsetAudioProcessor::reset()
+{
+    synth.reset();
+}
+
 
 #ifndef JucePlugin_PreferredChannelConfigurations
 bool OutsetAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
@@ -179,13 +190,28 @@ juce::MidiBuffer& midiMessages)
 
 void OutsetAudioProcessor::handleMIDI(uint8_t data0, uint8_t data1, uint8_t data2)
 {
+    
+    synth.midiMessage(data0, data1, data2);
+    
+    
     //the code below just prints all the incoming midi messages to the console. this is slow and should be commented out unless needed
 //    char s[16];
 //    snprintf(s, 16, "%02hhX %02hhX %02hhX", data0, data1, data2);
 //    DBG(s);
+    
+    
 }
 
-void OutsetAudioProcessor::render(juce::AudioBuffer<float>& buffer, int sampleCount, int bufferOffset) {}
+void OutsetAudioProcessor::render(juce::AudioBuffer<float>& buffer, int sampleCount, int bufferOffset) 
+{
+    float* outputBuffers[2] = { nullptr, nullptr }; 
+    outputBuffers[0] = buffer.getWritePointer(0) + bufferOffset;
+    if (getTotalNumOutputChannels() > 1) { //conditional checks for if audio is stereo.
+        outputBuffers[1] = buffer.getWritePointer(1) + bufferOffset;
+    }
+    
+    synth.render(outputBuffers, sampleCount);
+}
 
 //==============================================================================
 bool OutsetAudioProcessor::hasEditor() const
