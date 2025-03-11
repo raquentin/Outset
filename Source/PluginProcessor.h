@@ -10,7 +10,7 @@
 
 #include <JuceHeader.h>
 #include "Synth.h"
-
+#include "DSP/Filters.h"
 //==============================================================================
 /**
 */
@@ -61,6 +61,7 @@ private:
     void handleMIDI(uint8_t data0, uint8_t data1, uint8_t data2);
     void render(juce::AudioBuffer<float>& buffer, int sampleCount, int bufferOffset);
     
+	std::unique_ptr<Filters> filter;
     Synth synth;
 
     //==============================================================================

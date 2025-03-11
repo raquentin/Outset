@@ -22,6 +22,7 @@ OutsetAudioProcessor::OutsetAudioProcessor()
                        )
 #endif
 {
+    filter = std::make_unique<Filters>();
 }
 
 OutsetAudioProcessor::~OutsetAudioProcessor()
@@ -95,7 +96,11 @@ void OutsetAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
-    
+    juce::dsp::ProcessSpec spec;
+    spec.sampleRate = sampleRate;
+    spec.maximumBlockSize = samplesPerBlock;
+    spec.numChannels = 2;
+    filter->prepare(spec);
     synth.allocateResources(sampleRate, samplesPerBlock);
     reset();
 }
@@ -156,9 +161,11 @@ void OutsetAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
         buffer.clear (i, 0, buffer.getNumSamples());
     
     //our code (non-template stuff) starts here
-
+	filter->setCutoffFrequency(1000.0f);
+	filter->setResonance(0.7f);
     keyboardState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
     splitBufferByEvents(buffer, midiMessages);
+    filter->processBlock(buffer);
 }
 
 void OutsetAudioProcessor::splitBufferByEvents(juce::AudioBuffer<float>& buffer,
