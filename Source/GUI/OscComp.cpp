@@ -12,11 +12,9 @@
 OscComp::OscComp(const juce::String& title)
     : tabTitle(title)
 {
-    initializeSlider(oscLevelSlider, oscLevelLabel, "Level", juce::Slider::SliderStyle::LinearHorizontal, 0.0, 1.0, 0.01, 0.5);
+    initializeSlider(oscLevelSlider, oscLevelLabel, "Level", juce::Slider::SliderStyle::LinearVertical, 0.0, 1.0, 0.01, 0.5);
     initializeSlider(oscFineTuneSlider, oscFineTuneLabel, "Fine Tune", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, -50.0, 50.0, 0.01, 0.0);
-    initializeSlider(oscCoarseTuneSlider, oscCoarseTuneLabel, "Coarse Tune", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, -12.0, 12.0, 1.0, 0.0);
-    initializeSlider(oscRatioSlider, oscRatioLabel, "Ratio", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, 0.01, 4.0, 0.01, 1.0);
-    initializeSlider(oscFeedbackSlider, oscFeedbackLabel, "Feedback", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, 0.0, 100.0, 1.0, 0.0);
+    initializeSlider(oscRatioSlider, oscRatioLabel, "Ratio", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, -12.0, 12.0, 1.0, 0.0);
 }
 
 void OscComp::paint(juce::Graphics& g)
@@ -46,9 +44,7 @@ void OscComp::paint(juce::Graphics& g)
     g.setColour(juce::Colours::red);
     drawSliderOutline(g, oscLevelSlider);
     drawSliderOutline(g, oscFineTuneSlider);
-    drawSliderOutline(g, oscCoarseTuneSlider);
     drawSliderOutline(g, oscRatioSlider);
-    drawSliderOutline(g, oscFeedbackSlider);
 }
 
 void OscComp::resized()
@@ -70,18 +66,14 @@ void OscComp::resized()
     auto ratioSliderArea = fineTuneSliderArea;
     auto feedbackSliderArea = fineTuneSliderArea;
 
-    levelSliderArea = levelSliderArea.removeFromBottom(height_half / 2).reduced(width_half / 3, 0).withSizeKeepingCentre(width_3rd * 2, height_half / 2);
     fineTuneSliderArea = fineTuneSliderArea.removeFromBottom(height).removeFromLeft(width_3rd - small_knob_size / 2).withSizeKeepingCentre(small_knob_size, small_knob_size);
-    coarseTuneSliderArea = coarseTuneSliderArea.removeFromBottom(height).removeFromLeft(width_3rd + small_knob_size * 2).withSizeKeepingCentre(big_knob_size, big_knob_size);
-    feedbackSliderArea = feedbackSliderArea.removeFromBottom(height).removeFromRight(width_3rd + big_knob_size * 2).withSizeKeepingCentre(big_knob_size, big_knob_size);
+    levelSliderArea = levelSliderArea.removeFromBottom(height).removeFromRight(width_3rd + big_knob_size * 2).withSizeKeepingCentre(big_knob_size, big_knob_size);
     ratioSliderArea = ratioSliderArea.removeFromBottom(height).removeFromRight(width_3rd).withSizeKeepingCentre(big_knob_size, big_knob_size);
 
     // Set bounds for each slider and label
     setSliderBounds(oscLevelSlider, oscLevelLabel, levelSliderArea);
     setSliderBounds(oscFineTuneSlider, oscFineTuneLabel, fineTuneSliderArea);
-    setSliderBounds(oscCoarseTuneSlider, oscCoarseTuneLabel, coarseTuneSliderArea);
-    setSliderBounds(oscRatioSlider, oscRatioLabel, ratioSliderArea);
-    setSliderBounds(oscFeedbackSlider, oscFeedbackLabel, feedbackSliderArea);
+    setSliderBounds(oscRatioSlider, oscRatioLabel, coarseTuneSliderArea);
 }
 
 void OscComp::initializeSlider(juce::Slider& slider, juce::Label& label, const juce::String& name, juce::Slider::SliderStyle style, double min, double max, double interval, double initialValue)
@@ -123,12 +115,8 @@ void OscComp::sliderValueChanged(juce::Slider* slider)
         updateLabel(oscLevelLabel, "Level", slider->getValue());
     else if (slider == &oscFineTuneSlider)
         updateLabel(oscFineTuneLabel, "Fine Tune", slider->getValue());
-    else if (slider == &oscCoarseTuneSlider)
-        updateLabel(oscCoarseTuneLabel, "Coarse Tune", slider->getValue());
     else if (slider == &oscRatioSlider)
         updateLabel(oscRatioLabel, "Ratio", slider->getValue());
-    else if (slider == &oscFeedbackSlider)
-        updateLabel(oscFeedbackLabel, "Feedback", slider->getValue());
 }
 
 void OscComp::updateLabel(juce::Label& label, const juce::String& name, double value)
