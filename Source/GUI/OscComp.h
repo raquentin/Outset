@@ -33,15 +33,11 @@ private:
 
     juce::Slider oscLevelSlider;
     juce::Slider oscFineTuneSlider;
-    juce::Slider oscCoarseTuneSlider;
     juce::Slider oscRatioSlider;
-    juce::Slider oscFeedbackSlider;
 
     juce::Label oscLevelLabel;
     juce::Label oscFineTuneLabel;
-    juce::Label oscCoarseTuneLabel;
     juce::Label oscRatioLabel;
-    juce::Label oscFeedbackLabel;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(OscComp)
 };
