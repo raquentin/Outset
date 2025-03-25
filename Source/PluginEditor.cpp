@@ -50,12 +50,14 @@ void OutsetAudioProcessorEditor::resized()
     int height_3rd = getHeight() / 3;
     int height_6th = getHeight() / 6;
 
-    // setting the bounds here
+    // Top half here
     presets_comp.setBounds(0, 0, getWidth(), height_6th);
     osc_env_tab.setBounds(0, height_6th, width_half, 2 * height_3rd);
-    filter_comp.setBounds(width_half, height_6th, width_half, height_3rd);
     //env_comp.setBounds(0, height_half, width_half, height_3rd);
-    lfo_comp.setBounds(width_half, height_half, width_half, height_3rd);
+
+    // Bottom Half
+    lfo_comp.setBounds(width_half, height_6th, width_half, height_3rd);
+    filter_comp.setBounds(width_half, height_half, width_half, height_3rd);
     keyboard_comp.setBounds(0, height_6th * 5, getWidth(), height_6th);
 
 	//osc_comp.setTabDepth();

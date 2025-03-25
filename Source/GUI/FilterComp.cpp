@@ -13,22 +13,80 @@
 
 FilterComp::FilterComp()
 {
+
+
+    juce::Label* label = nullptr;
+
+    // Copied from EnvComp.cpp
+    juce::Colour mainBlue(0x91, 0xC9, 0xB5);
+    juce::Colour accentBlue(0x5B, 0x8F, 0x7E);
+    for (auto* slider : { &cutoffSlider, &resonanceSlider })
+    {
+        slider->setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+        slider->setTextBoxStyle(juce::Slider::NoTextBox, false, 50, 10);
+
+        slider->setColour(juce::Slider::rotarySliderFillColourId, mainBlue);
+        slider->setColour(juce::Slider::rotarySliderOutlineColourId, accentBlue);
+        slider->setColour(juce::Slider::thumbColourId, juce::Colours::white);
+        slider->addListener(this);
+    }
+
     // Configure cutoff frequency knob (20 Hz to 20 kHz, logarithmic behavior)
-    cutoffSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    cutoffSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
     cutoffSlider.setRange(20.0, 20000.0, 1.0);
     cutoffSlider.setSkewFactorFromMidPoint(1000.0);
     cutoffSlider.setValue(1000.0);
-    cutoffSlider.addListener(this);
     addAndMakeVisible(cutoffSlider);
 
     // Configure resonance (Q) knob (range from 0.1 to 10, default 0.707 for Butterworth)
-    resonanceSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    resonanceSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
     resonanceSlider.setRange(0.1, 10.0, 0.1);
     resonanceSlider.setValue(0.707);
-    resonanceSlider.addListener(this);
     addAndMakeVisible(resonanceSlider);
+
+
+    freqLabel.setText("Freq", juce::dontSendNotification);
+    qLabel.setText("Q", juce::dontSendNotification);
+    for (auto* label : { &freqLabel, &qLabel }) {
+        label->setJustificationType(juce::Justification::centredLeft);
+        label->setFont(juce::Font(14.0f, juce::Font::bold));
+        label->setColour(juce::Label::textColourId, juce::Colour(0x91, 0xC9, 0xB5));
+
+    }
+    addAndMakeVisible(freqLabel);
+    addAndMakeVisible(qLabel);
+
+
+    for (auto* textbox : { &cutoffTextBox, &resonanceTextBox }) {
+        textbox->setMultiLine(false);
+        textbox->setReturnKeyStartsNewLine(false);
+        textbox->setText(juce::String(cutoffSlider.getValue()), false);
+        textbox->setJustification(juce::Justification::centredTop);
+        textbox->applyFontToAllText(juce::Font(12.0f, juce::Font::plain));
+        textbox->applyColourToAllText(juce::Colour(0x91, 0xC9, 0xB5));
+    }
+
+    // Cutoff text box setup
+    cutoffTextBox.onReturnKey = [this] {
+        double value = cutoffTextBox.getText().getDoubleValue();
+        cutoffSlider.setValue(value);
+    };
+    cutoffTextBox.onFocusLost = [this] {
+        double value = cutoffTextBox.getText().getDoubleValue();
+        cutoffSlider.setValue(value);
+    };
+
+    addAndMakeVisible(cutoffTextBox);
+
+    // Resonance text box setup
+    resonanceTextBox.onReturnKey = [this] {
+        double value = resonanceTextBox.getText().getDoubleValue();
+        resonanceSlider.setValue(value);
+    };
+    resonanceTextBox.onFocusLost = [this] {
+        double value = resonanceTextBox.getText().getDoubleValue();
+        resonanceSlider.setValue(value);
+    };
+    addAndMakeVisible(resonanceTextBox);
+
 }
 
 FilterComp::~FilterComp()
@@ -37,11 +95,33 @@ FilterComp::~FilterComp()
 
 void FilterComp::paint(juce::Graphics& g)
 {
+    // ===== Copied code from EnvComp.cpp ======
     // Fill background
-    g.fillAll(juce::Colours::darkgrey);
+    g.fillAll(juce::Colour(0x1A, 0x1A, 0x1A));
 
+    g.setColour(juce::Colour(0x5B, 0x8F, 0x7E));
+    g.drawRect(getLocalBounds(), 1);
     // Define drawing area for the frequency response (with margin)
-    auto drawArea = getLocalBounds().reduced(10);
+    //auto drawArea = getLocalBounds().reduced(10);
+
+    auto bounds = getLocalBounds().reduced(14); // padding
+    auto width = bounds.getWidth();
+    auto height = bounds.getHeight() * 0.7;
+    auto drawArea = bounds.withHeight(height);
+
+
+    g.setColour(juce::Colours::white.withAlpha(0.2f));
+    for (int i = 1; i < 5; ++i)
+    {
+        float xPos = drawArea.getX() + (drawArea.getWidth() * i) / 5.0f;
+        g.drawLine(xPos, drawArea.getY(), xPos, drawArea.getBottom(), 1.0f);
+    }
+    for (int j = 1; j < 4; ++j)
+    {
+        float yPos = drawArea.getY() + (height * j) / 4.0f;
+        g.drawLine(drawArea.getX(), yPos, drawArea.getRight(), yPos, 1.0f);
+    }
+    // -=======================================-
 
     // Draw horizontal grid lines (for reference)
     g.setColour(juce::Colours::grey);
@@ -56,6 +136,8 @@ void FilterComp::paint(juce::Graphics& g)
             g.drawHorizontalLine(y, (float)drawArea.getX(), (float)drawArea.getRight());
         }
     }
+
+
 
     // Retrieve current cutoff and resonance from sliders
     float cutoff = (float)cutoffSlider.getValue();
@@ -157,24 +239,67 @@ void FilterComp::paint(juce::Graphics& g)
     }
 
     // Draw the frequency response curve in yellow
-    g.setColour(juce::Colours::yellow);
+    g.setColour(juce::Colour(0x91, 0xC9, 0xB5));
     g.strokePath(responseCurve, juce::PathStrokeType(2.0f));
+
+    juce::Path fillPath = responseCurve;
+    fillPath.lineTo(drawArea.getRight(), drawArea.getBottom());
+    fillPath.lineTo(drawArea.getX(), drawArea.getBottom());
+    fillPath.closeSubPath();
+    g.setGradientFill(juce::ColourGradient(
+        juce::Colour(0x91, 0xC9, 0xB5).withAlpha(0.15f),
+        drawArea.getX(), drawArea.getY(),
+        juce::Colour(0x91, 0xC9, 0xB5).withAlpha(0.05f),
+        drawArea.getX(), drawArea.getBottom(),
+        false));
+    g.fillPath(fillPath);
+
+    float freq = cutoffSlider.getValue();
+    float q = resonanceSlider.getValue();
+
+    cutoffTextBox.setBounds(cutoffSlider.getX()-2, cutoffSlider.getY() - 12, 40, 17);
+    resonanceTextBox.setBounds(resonanceSlider.getX()-2, resonanceSlider.getY() - 12, 40, 17);
+
 }
 
 void FilterComp::resized()
 {
-    auto bounds = getLocalBounds().reduced(10);
+    // ===== copied from EnvComp.cpp =====
+    auto bounds = getLocalBounds();
 
-    // Reserve the bottom 100 pixels for the knobs
-    auto sliderArea = bounds.removeFromBottom(100);
-    int sliderWidth = sliderArea.getWidth() / 2;
+    auto graphHeight = bounds.getHeight() * 0.7;
+    bounds.removeFromTop(graphHeight);
 
-    cutoffSlider.setBounds(sliderArea.removeFromLeft(sliderWidth).reduced(10));
-    resonanceSlider.setBounds(sliderArea.reduced(10));
+    auto sliderArea = bounds;
+    auto sliderWidth = sliderArea.getWidth() / 2;
+
+    auto knobSize = juce::jmin(sliderWidth * 0.6f, 35.0f);
+
+    auto cutoffArea = sliderArea.removeFromLeft(sliderWidth);
+    auto resonanceArea = sliderArea;
+
+    auto cutOffBounds = cutoffArea.withSizeKeepingCentre(knobSize, knobSize);
+    cutoffSlider.setBounds(cutOffBounds);
+    freqLabel.setBounds(cutOffBounds.withWidth(40).translated(-40, 0));
+
+    auto resBounds = resonanceArea.withSizeKeepingCentre(knobSize, knobSize);
+    resonanceSlider.setBounds(resBounds);
+    qLabel.setBounds(resBounds.withWidth(20).translated(-20, 0));
+
 }
 
 void FilterComp::sliderValueChanged(juce::Slider* slider)
 {
     // When either knob changes, update the display
+    if (slider == &cutoffSlider)
+    {
+        cutoffTextBox.setText(juce::String(slider->getValue()), false);
+    }
+    else if (slider == &resonanceSlider)
+    {
+        resonanceTextBox.setText(juce::String(slider->getValue()), false);
+    }
     repaint();
 }
+
+
