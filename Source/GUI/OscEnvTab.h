@@ -22,10 +22,12 @@ public:
         juce::Colour oscColor = juce::Colours::palevioletred;
         setTabBarDepth(30);
 
-        addTab("Oscillator A", oscColor, new OscEnvParent("Oscillator A"), true);
-        addTab("Oscillator B", oscColor, new OscEnvParent("Oscillator B"), true);
-        addTab("Oscillator C", oscColor, new OscEnvParent("Oscillator C"), true);
-        addTab("Oscillator D", oscColor, new OscEnvParent("Oscillator D"), true);
+        addTab("Osc 1", oscColor, new OscEnvParent("Osc 1"), true);
+        addTab("Osc 2", oscColor, new OscEnvParent("Osc 2"), true);
+        addTab("Osc 3", oscColor, new OscEnvParent("Osc 3"), true);
+        addTab("Osc 4", oscColor, new OscEnvParent("Osc 4"), true);
+        addTab("Osc 5", oscColor, new OscEnvParent("Osc 5"), true);
+        addTab("Osc 6", oscColor, new OscEnvParent("Osc 6"), true);
     }
 
     ~OscEnvTab() override = default;
