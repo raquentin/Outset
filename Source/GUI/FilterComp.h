@@ -32,6 +32,12 @@ private:
     juce::Slider cutoffSlider;
     juce::Slider resonanceSlider;
 
+    juce::Label freqLabel;
+    juce::Label qLabel;
+
+    juce::TextEditor cutoffTextBox;
+    juce::TextEditor resonanceTextBox;
+
     // Sample rate used for computing the response curve (default: 44100 Hz)
     float sampleRate = 44100.0f;
 
