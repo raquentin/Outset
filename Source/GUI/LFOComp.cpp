@@ -11,11 +11,12 @@
 #include <JuceHeader.h>
 #include "LFOComp.h"
 //==============================================================================
-LFOComp::LFOComp()
+LFOComp::LFOComp(juce::AudioProcessorValueTreeState& apvtsRef) : apvtsRef(apvtsRef)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
-    algo_ind = 0;
+    
+//    algo_ind = apvtsRef.getRawParameterValue("ALG_INDEX")->load();// joe code
 
     juce::Path next_trianglePath, prev_trianglePath;
     next_trianglePath.addTriangle(0, 0, 30, 15, 0, 30);
@@ -37,14 +38,19 @@ LFOComp::LFOComp()
 
 
     // Attach button click logic
-    next_b->onClick = [this]() {
-        algo_ind = (algo_ind + 1) % 32;
+    next_b->onClick = [this, &apvtsRef = apvtsRef]() {
+
+        int algo_ind = (apvtsRef.getRawParameterValue("ALG_INDEX")->load());
+
+        setAlgIndexParameter((algo_ind + 1) % 32);
+
         repaint();
     };
 
-    prev_b->onClick = [this]() {
-        algo_ind--;
-        if (algo_ind == -1) algo_ind = 31;
+    prev_b->onClick = [this, &apvtsRef = apvtsRef]() {
+        int algo_ind = (apvtsRef.getRawParameterValue("ALG_INDEX")->load());
+        if (--algo_ind == -1) algo_ind = 31;
+        setAlgIndexParameter(algo_ind);
         repaint();
     };
 
@@ -82,7 +88,7 @@ LFOComp::LFOComp()
     images.add(juce::ImageFileFormat::loadFrom(BinaryData::algorithm_32_png, BinaryData::algorithm_32_pngSize));
 
 
-    image = images[algo_ind];
+    image = images[(apvtsRef.getRawParameterValue("ALG_INDEX")->load())];
    
 }
 
@@ -112,14 +118,14 @@ void LFOComp::paint (juce::Graphics& g)
     g.setColour(juce::Colours::black);
     g.drawRect(centeredRect, 2);
 
-    image = images[algo_ind];
+    image = images[static_cast<int>(apvtsRef.getRawParameterValue("ALG_INDEX")->load())];
     if (image.isValid())
     {
         // Get component bounds and draw image centered
         g.drawImageWithin(image, centeredRect.getX(), centeredRect.getY(), centeredRect.getWidth(), centeredRect.getHeight(),
             juce::RectanglePlacement::yBottom);
 
-        g.drawText("Algorithm: " + std::to_string(algo_ind + 1), x, y + 2, bounds.getHeight() / 3 * 2, 20, juce::Justification::centred, true);
+        g.drawText("Algorithm: " + std::to_string(static_cast<int>(apvtsRef.getRawParameterValue("ALG_INDEX")->load()) + 1), x, y + 2, bounds.getHeight() / 3 * 2, 20, juce::Justification::centred, true);
     }
 }
 
@@ -132,4 +138,13 @@ void LFOComp::resized()
 
     next_b->setBounds(bounds.getWidth() * 2 / 3, bounds.getHeight() * 7 / 8 + 2, 18, 18);
     prev_b->setBounds(bounds.getWidth() / 3 - 20, bounds.getHeight() * 7 / 8 + 2, 18, 18);
+}
+
+void LFOComp::setAlgIndexParameter(int newValue)
+{
+
+    if (auto* param = apvtsRef.getParameter("ALG_INDEX"))
+    {
+        param->setValueNotifyingHost(newValue/31.0);  // we have to divide by 31 because setValueNotifyingHost takes a normalized value
+    }
 }

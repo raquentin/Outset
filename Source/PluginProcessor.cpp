@@ -346,13 +346,22 @@ juce::AudioProcessorValueTreeState::ParameterLayout OutsetAudioProcessor::create
             0.8f));
     }
 
-    // Alg Index Parameter (1)
-    juce::NormalisableRange<float> algIndexRange(0.0f, 31.0f, 1.0f);
-    layout.add(std::make_unique<juce::AudioParameterFloat>(
-        juce::ParameterID("ALG_INDEX", 1),
-        "Alg Index",
-        algIndexRange,
-        0.0f));
+//    // Alg Index Parameter (1)
+//    juce::NormalisableRange<float> algIndexRange(0.0f, 31.0f, 1.0f);
+//    layout.add(std::make_unique<juce::AudioParameterFloat>(
+//        juce::ParameterID("ALG_INDEX", 1),
+//        "Alg Index",
+//        algIndexRange,
+//        0.0f));
+
+
+
+    layout.add(std::make_unique<juce::AudioParameterInt>(
+        juce::ParameterID("ALG_INDEX", 1), // Parameter ID
+        "Alg Index",                       // Parameter name
+        0,                                 // Minimum value
+        31,                                // Maximum value
+        0));                               // Default value
 
     return layout;
 }

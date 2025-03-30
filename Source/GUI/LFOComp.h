@@ -18,15 +18,19 @@
 class LFOComp  : public juce::Component
 {
 public:
-    LFOComp();
+    LFOComp(juce::AudioProcessorValueTreeState& apvtsRef);
     ~LFOComp() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
+    void setAlgIndexParameter(int newValue);
 
 
 private:
-    int algo_ind;
+    juce::AudioProcessorValueTreeState& apvtsRef;
+    
+//    int algo_ind; the new way to access this is with apvtsRef.getRawParameterValue("ALG_INDEX")->load()
+    
     std::unique_ptr<juce::DrawableButton> next_b;
     std::unique_ptr<juce::DrawableButton> prev_b;
     juce::Image image;

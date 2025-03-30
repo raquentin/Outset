@@ -13,7 +13,7 @@
 
 FilterComp::FilterComp(juce::AudioProcessorValueTreeState& apvtsRef) : apvtsRef(apvtsRef),
 cutoffAttachment(apvtsRef, "CUTOFF", cutoffSlider),
-resonanceAttachment(apvtsRef, "RESONACE", resonanceSlider)
+resonanceAttachment(apvtsRef, "RESONANCE", resonanceSlider)
 {
 
 
