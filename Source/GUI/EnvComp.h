@@ -35,6 +35,13 @@ private:
     
     int envNum;
     juce::AudioProcessorValueTreeState& apvtsRef;
+    
+    juce::AudioProcessorValueTreeState::SliderAttachment attackAttachment;
+    juce::AudioProcessorValueTreeState::SliderAttachment decayAttachment;
+    juce::AudioProcessorValueTreeState::SliderAttachment sustainAttachment;
+    juce::AudioProcessorValueTreeState::SliderAttachment releaseAttachment;
+    
+
 
     juce::Label attackLabel;
     juce::Label decayLabel;

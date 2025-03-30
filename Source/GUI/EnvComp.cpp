@@ -4,7 +4,12 @@
 //==============================================================================
 EnvComp::EnvComp(int num, juce::AudioProcessorValueTreeState& apvtsRef)
     : envNum(num),
-      apvtsRef(apvtsRef)
+      apvtsRef(apvtsRef),
+      attackAttachment(apvtsRef, "ATTACK_" + std::to_string(num), attackSlider),
+      decayAttachment(apvtsRef, "DECAY_" + std::to_string(num), decaySlider),
+      sustainAttachment(apvtsRef, "SUSTAIN_" + std::to_string(num), sustainSlider),
+      releaseAttachment(apvtsRef, "RELEASE_" + std::to_string(num), releaseSlider)
+ 
 {
     initializeSlider(attackSlider, "A", 0.0, 5.0, 0.01, 0.1, true);
     initializeSlider(decaySlider, "D", 0.0, 5.0, 0.01, 0.1, true);
