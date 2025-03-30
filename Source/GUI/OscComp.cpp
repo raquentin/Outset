@@ -14,8 +14,8 @@ OscComp::OscComp(const juce::String& title)
 {
     // setup the sliders
     initializeSlider(oscLevelSlider, oscLevelLabel, "Level", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, 0.0, 1.0, 0.01, 0.5);
-    initializeSlider(oscFineTuneSlider, oscFineTuneLabel, "Fine", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, 0.0, 100.0, 0.01, 0.0);
-    initializeSlider(oscRatioSlider, oscRatioLabel, "Ratio", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, 1.0, 12.0, 1.0, 1.0);
+    initializeSlider(oscFineTuneSlider, oscFineTuneLabel, "Fine", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, 0.0, 100.0, 1.0, 0.0);
+    initializeSlider(oscRatioSlider, oscRatioLabel, "Coarse", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, 1.0, 12.0, 1.0, 1.0);
     
     // again kinda spamming the same colors everywhere, we can do a pr to pull it out
     juce::Colour mainBlue(0x91, 0xC9, 0xB5);
