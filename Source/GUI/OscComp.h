@@ -15,7 +15,7 @@
 class OscComp : public juce::Component, private juce::Slider::Listener
 {
 public:
-    OscComp(const juce::String& title = "title");
+    OscComp(int num, juce::AudioProcessorValueTreeState& apvtsRef);
     ~OscComp() override = default;
 
     void paint(juce::Graphics& g) override;
@@ -29,15 +29,20 @@ private:
     void sliderValueChanged(juce::Slider* slider) override;
     void updateLabel(juce::Label& label, const juce::String& name, double value);
 
-    juce::String tabTitle;
+    int oscNum;
+    juce::AudioProcessorValueTreeState& apvtsRef;
 
     juce::Slider oscLevelSlider;
-    juce::Slider oscFineTuneSlider;
-    juce::Slider oscRatioSlider;
+    juce::Slider oscFineSlider;
+    juce::Slider oscCoarseSlider;
+    
+    juce::AudioProcessorValueTreeState::SliderAttachment levelAttachment;
+    juce::AudioProcessorValueTreeState::SliderAttachment fineAttachment;
+    juce::AudioProcessorValueTreeState::SliderAttachment coarseAttachment;
 
     juce::Label oscLevelLabel;
-    juce::Label oscFineTuneLabel;
-    juce::Label oscRatioLabel;
+    juce::Label oscFineLabel;
+    juce::Label oscCoarseLabel;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(OscComp)
 };

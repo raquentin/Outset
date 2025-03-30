@@ -18,7 +18,7 @@
 class EnvComp : public juce::Component, private juce::Slider::Listener
 {
 public:
-    EnvComp();
+    EnvComp(int num, juce::AudioProcessorValueTreeState& apvtsRef);
     ~EnvComp() override;
 
     void paint(juce::Graphics&) override;
@@ -32,6 +32,9 @@ private:
     juce::Slider decaySlider;
     juce::Slider sustainSlider;
     juce::Slider releaseSlider;
+    
+    int envNum;
+    juce::AudioProcessorValueTreeState& apvtsRef;
 
     juce::Label attackLabel;
     juce::Label decayLabel;

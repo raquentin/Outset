@@ -2,7 +2,9 @@
 #include "EnvComp.h"
 
 //==============================================================================
-EnvComp::EnvComp()
+EnvComp::EnvComp(int num, juce::AudioProcessorValueTreeState& apvtsRef)
+    : envNum(num),
+      apvtsRef(apvtsRef)
 {
     initializeSlider(attackSlider, "A", 0.0, 5.0, 0.01, 0.1, true);
     initializeSlider(decaySlider, "D", 0.0, 5.0, 0.01, 0.1, true);
