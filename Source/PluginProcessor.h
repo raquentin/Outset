@@ -54,6 +54,9 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+    
+    juce::AudioProcessorValueTreeState::ParameterLayout createAudioParameters();
+    juce::AudioProcessorValueTreeState apvts {*this, nullptr, "Parameters", createAudioParameters()};
 
 private:
     juce::MidiKeyboardState keyboardState;

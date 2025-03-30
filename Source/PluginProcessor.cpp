@@ -245,6 +245,119 @@ void OutsetAudioProcessor::setStateInformation (const void* data, int sizeInByte
     // whose contents will have been created by the getStateInformation() call.
 }
 
+juce::AudioProcessorValueTreeState::ParameterLayout OutsetAudioProcessor::createAudioParameters()
+{
+    juce::AudioProcessorValueTreeState::ParameterLayout layout;
+
+    // Level Parameters (6)
+    juce::NormalisableRange<float> levelRange(0.0f, 1.0f, 0.01f);
+    for (int i = 1; i <= 6; ++i)
+    {
+        layout.add(std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID("LEVEL_" + juce::String(i), 1),
+            "Level" + juce::String(i),
+            levelRange,
+            0.5f));
+    }
+
+    // Fine Parameters (6)
+    juce::NormalisableRange<float> fineRange(0.0f, 100.0f, 1.0f);
+    for (int i = 1; i <= 6; ++i)
+    {
+        layout.add(std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID("FINE_" + juce::String(i), 1),
+            "Fine" + juce::String(i),
+            fineRange,
+            0.0f));
+    }
+
+    // Coarse Parameters (6)
+    juce::NormalisableRange<float> coarseRange(1.0f, 12.0f, 1.0f);
+    for (int i = 1; i <= 6; ++i)
+    {
+        layout.add(std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID("COARSE_" + juce::String(i), 1),
+            "Coarse" + juce::String(i),
+            coarseRange,
+            1.0f));
+    }
+
+    // Cutoff Parameter (1)
+    juce::NormalisableRange<float> cutoffRange(20.0f, 20000.0f, 1.0f);
+    cutoffRange.setSkewForCentre(1000.0f);
+    layout.add(std::make_unique<juce::AudioParameterFloat>(
+        juce::ParameterID("CUTOFF", 1),
+        "Cutoff",
+        cutoffRange,
+        20000.0f));
+
+    // Resonance Parameter (1)
+    juce::NormalisableRange<float> resonanceRange(0.1f, 10.0f, 0.1f);
+    layout.add(std::make_unique<juce::AudioParameterFloat>(
+        juce::ParameterID("RESONANCE", 1),
+        "Resonance",
+        resonanceRange,
+        0.707f));
+
+    // Attack Parameters (6)
+    juce::NormalisableRange<float> attackRange(0.0f, 5.0f, 0.01f);
+    attackRange.setSkewForCentre(1.0f);
+    for (int i = 1; i <= 6; ++i)
+    {
+        layout.add(std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID("ATTACK_" + juce::String(i), 1),
+            "Attack" + juce::String(i),
+            attackRange,
+            0.1f));
+    }
+
+    // Decay Parameters (6)
+    juce::NormalisableRange<float> decayRange(0.0f, 5.0f, 0.01f);
+    decayRange.setSkewForCentre(1.0f);
+    for (int i = 1; i <= 6; ++i)
+    {
+        layout.add(std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID("DECAY_" + juce::String(i), 1),
+            "Decay" + juce::String(i),
+            decayRange,
+            0.1f));
+    }
+
+    // Release Parameters (6)
+    juce::NormalisableRange<float> releaseRange(0.0f, 5.0f, 0.01f);
+    releaseRange.setSkewForCentre(1.0f);
+    for (int i = 1; i <= 6; ++i)
+    {
+        layout.add(std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID("RELEASE_" + juce::String(i), 1),
+            "Release" + juce::String(i),
+            releaseRange,
+            0.1f));
+    }
+
+    // Sustain Parameters (6)
+    juce::NormalisableRange<float> sustainRange(0.0f, 1.0f, 0.01f);
+    for (int i = 1; i <= 6; ++i)
+    {
+        layout.add(std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID("SUSTAIN_" + juce::String(i), 1),
+            "Sustain" + juce::String(i),
+            sustainRange,
+            0.8f));
+    }
+
+    // Alg Index Parameter (1)
+    juce::NormalisableRange<float> algIndexRange(0.0f, 31.0f, 1.0f);
+    layout.add(std::make_unique<juce::AudioParameterFloat>(
+        juce::ParameterID("ALG_INDEX", 1),
+        "Alg Index",
+        algIndexRange,
+        0.0f));
+
+    return layout;
+}
+
+
 //==============================================================================
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
