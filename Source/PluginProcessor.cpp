@@ -160,12 +160,30 @@ void OutsetAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
+    
+    
     //our code (non-template stuff) starts here
+  
+    
+    
 	filter->setCutoffFrequency(1000.0f);
 	filter->setResonance(0.7f);
     keyboardState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
     splitBufferByEvents(buffer, midiMessages);
     filter->processBlock(buffer);
+    
+    
+    
+    //uncomment these to check that parameters and sliders are linked
+//    double cutoff = apvts.getRawParameterValue("CUTOFF")->load();
+//    double attack3 = apvts.getRawParameterValue("ATTACK_3")->load();
+//    double fine1 = apvts.getRawParameterValue("FINE_1")->load();
+//    
+//    
+//    DBG(cutoff);
+//    DBG(attack3);
+//    DBG(fine1);
+
 }
 
 void OutsetAudioProcessor::splitBufferByEvents(juce::AudioBuffer<float>& buffer,
@@ -345,14 +363,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout OutsetAudioProcessor::create
             sustainRange,
             0.8f));
     }
-
-//    // Alg Index Parameter (1)
-//    juce::NormalisableRange<float> algIndexRange(0.0f, 31.0f, 1.0f);
-//    layout.add(std::make_unique<juce::AudioParameterFloat>(
-//        juce::ParameterID("ALG_INDEX", 1),
-//        "Alg Index",
-//        algIndexRange,
-//        0.0f));
 
 
 
