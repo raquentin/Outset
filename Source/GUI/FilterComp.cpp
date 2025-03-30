@@ -1,4 +1,4 @@
-﻿/*
+/*
   ==============================================================================
 
     FilterComp.cpp
@@ -301,5 +301,3 @@ void FilterComp::sliderValueChanged(juce::Slider* slider)
     }
     repaint();
 }
-
-

@@ -4,10 +4,10 @@
 //==============================================================================
 EnvComp::EnvComp()
 {
-    initializeSlider(attackSlider, "A", 0.0, 5.0, 0.01, 0.1);
-    initializeSlider(decaySlider, "D", 0.0, 5.0, 0.01, 0.1);
-    initializeSlider(sustainSlider, "S", 0.0, 1.0, 0.01, 0.8);
-    initializeSlider(releaseSlider, "R", 0.0, 5.0, 0.01, 0.1);
+    initializeSlider(attackSlider, "A", 0.0, 5.0, 0.01, 0.1, true);
+    initializeSlider(decaySlider, "D", 0.0, 5.0, 0.01, 0.1, true);
+    initializeSlider(sustainSlider, "S", 0.0, 1.0, 0.01, 0.8, false);
+    initializeSlider(releaseSlider, "R", 0.0, 5.0, 0.01, 0.1, true);
     
     // Kind of just guessed on these colors. Perhaps later we can have some
     // global color obj.
@@ -26,7 +26,7 @@ EnvComp::~EnvComp()
 {
 }
 
-void EnvComp::initializeSlider(juce::Slider& slider, const juce::String& name, double min, double max, double interval, double initialValue)
+void EnvComp::initializeSlider(juce::Slider& slider, const juce::String& name, double min, double max, double interval, double initialValue, bool skewed)
 {
     addAndMakeVisible(slider);
     slider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
@@ -34,6 +34,7 @@ void EnvComp::initializeSlider(juce::Slider& slider, const juce::String& name, d
     slider.setRange(min, max, interval);
     slider.setValue(initialValue);
     slider.addListener(this);
+    if (skewed) slider.setSkewFactorFromMidPoint(1.0); // skews a, d, and r to have 1 second be the midpoint
 
     juce::Label* label = nullptr;
     if (name == "A") label = &attackLabel;

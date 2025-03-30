@@ -25,7 +25,7 @@ public:
     void resized() override;
 
 private:
-    void initializeSlider(juce::Slider& slider, const juce::String& name, double min, double max, double interval, double initialValue);
+    void initializeSlider(juce::Slider& slider, const juce::String& name, double min, double max, double interval, double initialValue, bool skewed);
     void sliderValueChanged(juce::Slider* slider) override;
     void setSliderBounds(juce::Slider& slider, juce::Label& label, juce::Rectangle<int> bounds);
     juce::Slider attackSlider;
