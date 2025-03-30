@@ -13,6 +13,8 @@
 #include <JuceHeader.h>
 #include "OscEnvParent.h"
 
+
+// This component acts as the parent for the OscEnvParents. Switching tabs makes one of the 6 OscEnv Parents Visible.
 class OscEnvTab : public juce::TabbedComponent
 {
 public:
