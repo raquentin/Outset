@@ -17,8 +17,11 @@
 class OscEnvParent : public juce::Component
 {
 public:
-    OscEnvParent(const juce::String& title)
-        : oscComp(title)
+    OscEnvParent(const int operatorNum, juce::AudioProcessorValueTreeState& apvtsRef)
+        : oscComp(operatorNum, apvtsRef),
+          envComp(operatorNum, apvtsRef),
+          operatorNum(operatorNum),
+          apvtsRef(apvtsRef)
     {
         addAndMakeVisible(oscComp);
         addAndMakeVisible(envComp);
@@ -36,6 +39,11 @@ public:
 private:
     OscComp oscComp;
     EnvComp envComp;
+    
+    //this class does not necessarily have any need to hold these references as they are passed to the children in the constuctor.
+    //I am leaving them here for convenience in case the need arises
+    int operatorNum;
+    juce::AudioProcessorValueTreeState& apvtsRef;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(OscEnvParent)
 };

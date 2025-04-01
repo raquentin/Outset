@@ -8,20 +8,26 @@
   ==============================================================================
 */
 #include "OscComp.h"
+#include <string>
 
-OscComp::OscComp(const juce::String& title)
-    : tabTitle(title)
+OscComp::OscComp(int num, juce::AudioProcessorValueTreeState& apvtsRef)
+    : oscNum(num),
+      apvtsRef(apvtsRef),
+      levelAttachment(apvtsRef, "LEVEL_" + std::to_string(oscNum), oscLevelSlider),
+      fineAttachment(apvtsRef, "FINE_" + std::to_string(oscNum), oscFineSlider),
+      coarseAttachment(apvtsRef, "COARSE_" + std::to_string(oscNum), oscCoarseSlider)
+      
 {
     // setup the sliders
     initializeSlider(oscLevelSlider, oscLevelLabel, "Level", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, 0.0, 1.0, 0.01, 0.5);
-    initializeSlider(oscFineTuneSlider, oscFineTuneLabel, "Fine", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, -50.0, 50.0, 0.01, 0.0);
-    initializeSlider(oscRatioSlider, oscRatioLabel, "Ratio", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, -12.0, 12.0, 1.0, 0.0);
+    initializeSlider(oscFineSlider, oscFineLabel, "Fine", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, 0.0, 100.0, 1.0, 0.0);
+    initializeSlider(oscCoarseSlider, oscCoarseLabel, "Coarse", juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, 1.0, 12.0, 1.0, 1.0);
     
     // again kinda spamming the same colors everywhere, we can do a pr to pull it out
     juce::Colour mainBlue(0x91, 0xC9, 0xB5);
     juce::Colour accentBlue(0x5B, 0x8F, 0x7E);
     
-    for (auto* slider : {&oscLevelSlider, &oscFineTuneSlider, &oscRatioSlider})
+    for (auto* slider : {&oscLevelSlider, &oscFineSlider, &oscCoarseSlider})
     {
         slider->setColour(juce::Slider::rotarySliderFillColourId, mainBlue);
         slider->setColour(juce::Slider::rotarySliderOutlineColourId, accentBlue);
@@ -29,7 +35,7 @@ OscComp::OscComp(const juce::String& title)
     }
     
     // TODO: juce funt deprecated
-    for (auto* label : {&oscLevelLabel, &oscFineTuneLabel, &oscRatioLabel})
+    for (auto* label : {&oscLevelLabel, &oscFineLabel, &oscCoarseLabel})
     {
         label->setFont(juce::Font(14.0f, juce::Font::bold));
         label->setColour(juce::Label::textColourId, mainBlue);
@@ -58,8 +64,8 @@ void OscComp::paint(juce::Graphics& g)
     juce::Path wavePath;
     float amplitude = height / 2.0f * oscLevelSlider.getValue();
     float centerY = graphBounds.getCentreY();
-    float ratio = oscRatioSlider.getValue();
-    float fineTune = oscFineTuneSlider.getValue() / 25.0f;
+    float ratio = oscCoarseSlider.getValue();
+    float fineTune = oscFineSlider.getValue() / 25.0f;
     
     // The thing about fractional ratios
     ratio = std::max(1.0f, std::abs(ratio));
@@ -110,11 +116,11 @@ void OscComp::paint(juce::Graphics& g)
     g.drawText(valueStr(oscLevelSlider.getValue()),
               oscLevelSlider.getBounds().translated(0, -15),
               juce::Justification::centred);
-    g.drawText(valueStr(oscFineTuneSlider.getValue()),
-              oscFineTuneSlider.getBounds().translated(0, -15),
+    g.drawText(valueStr(oscFineSlider.getValue()),
+              oscFineSlider.getBounds().translated(0, -15),
               juce::Justification::centred);
-    g.drawText(valueStr(oscRatioSlider.getValue()),
-              oscRatioSlider.getBounds().translated(0, -15),
+    g.drawText(valueStr(oscCoarseSlider.getValue()),
+              oscCoarseSlider.getBounds().translated(0, -15),
               juce::Justification::centred);
 }
 
@@ -138,13 +144,13 @@ void OscComp::resized()
     auto ratioArea = sliderArea;
     
     oscLevelSlider.setBounds(levelArea.withSizeKeepingCentre(knobSize, knobSize));
-    oscFineTuneSlider.setBounds(fineArea.withSizeKeepingCentre(knobSize, knobSize));
-    oscRatioSlider.setBounds(ratioArea.withSizeKeepingCentre(knobSize, knobSize));
+    oscFineSlider.setBounds(fineArea.withSizeKeepingCentre(knobSize, knobSize));
+    oscCoarseSlider.setBounds(ratioArea.withSizeKeepingCentre(knobSize, knobSize));
     
     // labels below sliders
     oscLevelLabel.setBounds(oscLevelSlider.getBounds().withHeight(20).translated(0, knobSize/2 + 5));
-    oscFineTuneLabel.setBounds(oscFineTuneSlider.getBounds().withHeight(20).translated(0, knobSize/2 + 5));
-    oscRatioLabel.setBounds(oscRatioSlider.getBounds().withHeight(20).translated(0, knobSize/2 + 5));
+    oscFineLabel.setBounds(oscFineSlider.getBounds().withHeight(20).translated(0, knobSize/2 + 5));
+    oscCoarseLabel.setBounds(oscCoarseSlider.getBounds().withHeight(20).translated(0, knobSize/2 + 5));
 }
 
 void OscComp::initializeSlider(juce::Slider& slider, juce::Label& label, const juce::String& name, juce::Slider::SliderStyle style, double min, double max, double interval, double initialValue)

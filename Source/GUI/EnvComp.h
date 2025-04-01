@@ -18,20 +18,30 @@
 class EnvComp : public juce::Component, private juce::Slider::Listener
 {
 public:
-    EnvComp();
+    EnvComp(int num, juce::AudioProcessorValueTreeState& apvtsRef);
     ~EnvComp() override;
 
     void paint(juce::Graphics&) override;
     void resized() override;
 
 private:
-    void initializeSlider(juce::Slider& slider, const juce::String& name, double min, double max, double interval, double initialValue);
+    void initializeSlider(juce::Slider& slider, const juce::String& name, double min, double max, double interval, double initialValue, bool skewed);
     void sliderValueChanged(juce::Slider* slider) override;
     void setSliderBounds(juce::Slider& slider, juce::Label& label, juce::Rectangle<int> bounds);
     juce::Slider attackSlider;
     juce::Slider decaySlider;
     juce::Slider sustainSlider;
     juce::Slider releaseSlider;
+    
+    int envNum;
+    juce::AudioProcessorValueTreeState& apvtsRef;
+    
+    juce::AudioProcessorValueTreeState::SliderAttachment attackAttachment;
+    juce::AudioProcessorValueTreeState::SliderAttachment decayAttachment;
+    juce::AudioProcessorValueTreeState::SliderAttachment sustainAttachment;
+    juce::AudioProcessorValueTreeState::SliderAttachment releaseAttachment;
+    
+
 
     juce::Label attackLabel;
     juce::Label decayLabel;

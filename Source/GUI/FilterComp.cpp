@@ -1,4 +1,4 @@
-﻿/*
+/*
   ==============================================================================
 
     FilterComp.cpp
@@ -11,7 +11,9 @@
 #include <JuceHeader.h>
 #include "FilterComp.h"
 
-FilterComp::FilterComp()
+FilterComp::FilterComp(juce::AudioProcessorValueTreeState& apvtsRef) : apvtsRef(apvtsRef),
+cutoffAttachment(apvtsRef, "CUTOFF", cutoffSlider),
+resonanceAttachment(apvtsRef, "RESONANCE", resonanceSlider)
 {
 
 
@@ -34,7 +36,7 @@ FilterComp::FilterComp()
     // Configure cutoff frequency knob (20 Hz to 20 kHz, logarithmic behavior)
     cutoffSlider.setRange(20.0, 20000.0, 1.0);
     cutoffSlider.setSkewFactorFromMidPoint(1000.0);
-    cutoffSlider.setValue(1000.0);
+    cutoffSlider.setValue(20000.0);
     addAndMakeVisible(cutoffSlider);
 
     // Configure resonance (Q) knob (range from 0.1 to 10, default 0.707 for Butterworth)
@@ -301,5 +303,3 @@ void FilterComp::sliderValueChanged(juce::Slider* slider)
     }
     repaint();
 }
-
-

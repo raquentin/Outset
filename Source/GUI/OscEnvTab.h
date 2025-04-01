@@ -18,18 +18,18 @@
 class OscEnvTab : public juce::TabbedComponent
 {
 public:
-    OscEnvTab()
+    OscEnvTab(juce::AudioProcessorValueTreeState& apvtsRef)
         : juce::TabbedComponent(juce::TabbedButtonBar::TabsAtTop)
     {
         juce::Colour oscColor = juce::Colours::palevioletred;
         setTabBarDepth(30);
 
-        addTab("Osc 1", oscColor, new OscEnvParent("Osc 1"), true);
-        addTab("Osc 2", oscColor, new OscEnvParent("Osc 2"), true);
-        addTab("Osc 3", oscColor, new OscEnvParent("Osc 3"), true);
-        addTab("Osc 4", oscColor, new OscEnvParent("Osc 4"), true);
-        addTab("Osc 5", oscColor, new OscEnvParent("Osc 5"), true);
-        addTab("Osc 6", oscColor, new OscEnvParent("Osc 6"), true);
+        addTab("Osc 1", oscColor, new OscEnvParent(1, apvtsRef), true);
+        addTab("Osc 2", oscColor, new OscEnvParent(2, apvtsRef), true);
+        addTab("Osc 3", oscColor, new OscEnvParent(3, apvtsRef), true);
+        addTab("Osc 4", oscColor, new OscEnvParent(4, apvtsRef), true);
+        addTab("Osc 5", oscColor, new OscEnvParent(5, apvtsRef), true);
+        addTab("Osc 6", oscColor, new OscEnvParent(6, apvtsRef), true);
     }
 
     ~OscEnvTab() override = default;

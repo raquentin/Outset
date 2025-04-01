@@ -16,7 +16,7 @@ class FilterComp : public juce::Component,
     public juce::Slider::Listener
 {
 public:
-    FilterComp();
+    FilterComp(juce::AudioProcessorValueTreeState& apvtsRef);
     ~FilterComp() override;
 
     void paint(juce::Graphics& g) override;
@@ -29,8 +29,13 @@ public:
     void setSampleRate(float newSampleRate) { sampleRate = newSampleRate; repaint(); }
 
 private:
+    juce::AudioProcessorValueTreeState& apvtsRef;
+    
     juce::Slider cutoffSlider;
     juce::Slider resonanceSlider;
+    
+    juce::AudioProcessorValueTreeState::SliderAttachment cutoffAttachment;
+    juce::AudioProcessorValueTreeState::SliderAttachment resonanceAttachment;
 
     juce::Label freqLabel;
     juce::Label qLabel;
